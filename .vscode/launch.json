@@ -5,18 +5,18 @@
   "version": "1.0.0",
   "configurations": [
     {
-      "name": "News App",
+      "name": "Shop App",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "News App (profile mode)",
+      "name": "Shop App (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "News App (release mode)",
+      "name": "Shop App (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

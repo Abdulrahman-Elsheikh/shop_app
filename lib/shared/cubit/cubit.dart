@@ -6,12 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_app/shared/cubit/states.dart';
 import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
-// import 'package:sqflite/sqflite.dart';
 
-import '../../modules/business/business_screen.dart';
-import '../../modules/science/science_screen.dart';
 import '../../modules/settings/settings.dart';
-import '../../modules/sports/sports_screen.dart';
 import '../network/remote/dio_helper.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
@@ -47,9 +43,6 @@ class NewsCubit extends Cubit<NewsStates> {
   ];
 
   List<Widget> screens = [
-    BusinessScreen(),
-    ScienceScreen(),
-    SportsScreen(),
     SettingsScreen(),
   ];
 
