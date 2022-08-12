@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_app/shared/bloc_observer.dart';
 import 'package:flutter_first_app/shared/cubit/cubit.dart';
 import 'package:flutter_first_app/shared/cubit/states.dart';
-import 'package:flutter_first_app/shared/cubit/themes.dart';
+import 'package:flutter_first_app/shared/styles/themes.dart';
 import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
 // import 'layout/shop_layout.dart';
 import 'modules/on_boarding/on_boarding_screen.dart';

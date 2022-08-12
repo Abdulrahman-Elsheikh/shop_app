@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_first_app/modules/login_screen/login.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
+import '../login/login_screen.dart';
 
 class BoardingModel {
   final String image;

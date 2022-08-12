@@ -3,9 +3,11 @@
 // import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
+import '../styles/colors.dart';
+
 Widget defaultButton({
   double width = double.infinity,
-  Color background = Colors.blue,
+  Color background = defaultColor,
   bool isUppercase = true,
   double borderRadius = 0.0,
   double height = 50.0,
@@ -32,6 +34,9 @@ Widget defaultButton({
         color: background,
       ),
     );
+
+Widget defaultTextButton({required Function function, required String text}) =>
+    TextButton(onPressed: function(), child: Text(text.toUpperCase()));
 
 Widget defaultTextField({
   double width = double.infinity,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../styles/colors.dart';
+import 'colors.dart';
 
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: HexColor('333739'),
@@ -45,9 +45,6 @@ ThemeData darkTheme = ThemeData(
 ThemeData lightTheme = ThemeData(
     primarySwatch: defaultColor,
     scaffoldBackgroundColor: Colors.white,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.deepOrange,
-    ),
     textTheme: TextTheme(
       bodyText1: TextStyle(
         color: Colors.black,
