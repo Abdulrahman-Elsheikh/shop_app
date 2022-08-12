@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_app/shared/cubit/cubit.dart';
-import 'package:flutter_first_app/shared/cubit/states.dart';
+import 'package:flutter_first_app/shared/cubit/app_cubit.dart';
+import 'package:flutter_first_app/shared/cubit/app_states.dart';
 
 import '../../shared/components/components.dart';
 
@@ -14,10 +14,9 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsCubit, NewsStates>(
-      listener: (BuildContext context, NewsStates state) {},
-      builder: (BuildContext context, NewsStates state) {
-        var list = NewsCubit.get(context).search;
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (BuildContext context, AppStates state) {},
+      builder: (BuildContext context, AppStates state) {
         return Scaffold(
           appBar: AppBar(),
           body: Column(
@@ -31,9 +30,6 @@ class SearchScreen extends StatelessWidget {
                   type: TextInputType.text,
                   isPassword: false,
                   onSubmit: null,
-                  onChange: (value) {
-                    NewsCubit.get(context).getSearch(value);
-                  },
                   onTap: null,
                   validate: (String value) {
                     if (value.isEmpty) {

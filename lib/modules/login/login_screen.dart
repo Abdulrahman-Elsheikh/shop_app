@@ -3,12 +3,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_app/modules/cubit/states.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:flutter_first_app/layout/shop_layout.dart';
+import 'package:flutter_first_app/modules/cubit/shop_login_states.dart';
 import '../../shared/components/components.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
-import '../cubit/cubit.dart';
+import '../cubit/shop_login_cubit.dart';
 import '../register/register_screen.dart';
 
 class ShopLoginScreen extends StatelessWidget {
@@ -25,23 +25,18 @@ class ShopLoginScreen extends StatelessWidget {
         listener: (BuildContext context, state) {
           if (state is ShopLoginSuccessState) {
             if (state.loginModel.status == true) {
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message ?? '',
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              showToast(
+                  message: state.loginModel.message ?? '',
+                  state: ToastStates.SUCCESS);
+              CacheHelper.saveData(
+                      key: 'token', value: state.loginModel.data!.token)
+                  .then((value) {
+                navigateAndEnd(context, ShopLayout());
+              });
             } else {
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message ?? '',
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              showToast(
+                  message: state.loginModel.message ?? '',
+                  state: ToastStates.ERROR);
             }
           }
         },
@@ -107,14 +102,6 @@ class ShopLoginScreen extends StatelessWidget {
                                   .changePasswordVisibility();
                             },
                             isPassword: ShopLoginCubit.get(context).isPassword,
-                            onSubmit: (value) {
-                              if (formKey.currentState!.validate()) {
-                                ShopLoginCubit.get(context).userLogin(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                );
-                              }
-                            },
                           ),
                           SizedBox(height: 30.0),
                           ConditionalBuilder(

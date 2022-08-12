@@ -40,21 +40,13 @@ class UserData {
   });
 
   UserData.fromJson(Map<String, dynamic> json) {
-    id:
-    json["id"];
-    name:
-    json["name"];
-    email:
-    json["email"];
-    phone:
-    json["phone"];
-    image:
-    json["image"];
-    points:
-    json["points"];
-    credits:
-    json["credits"];
-    token:
-    json["token"];
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    image = json['image'];
+    points = json['points'];
+    credits = json['credits'];
+    token = json['token'];
   }
 }

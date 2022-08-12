@@ -1,11 +1,13 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe, deprecated_member_use, unnecessary_import
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe, deprecated_member_use, unnecessary_import, unnecessary_null_comparison
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first_app/layout/shop_layout.dart';
+import 'package:flutter_first_app/modules/login/login_screen.dart';
 import 'package:flutter_first_app/shared/bloc_observer.dart';
-import 'package:flutter_first_app/shared/cubit/cubit.dart';
-import 'package:flutter_first_app/shared/cubit/states.dart';
+import 'package:flutter_first_app/shared/cubit/app_cubit.dart';
+import 'package:flutter_first_app/shared/cubit/app_states.dart';
 import 'package:flutter_first_app/shared/styles/themes.dart';
 import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
 // import 'layout/shop_layout.dart';
@@ -17,26 +19,42 @@ void main() async {
 
   BlocOverrides.runZoned(
     () {
-      NewsCubit();
+      AppCubit();
     },
     blocObserver: MyBlocObserver(),
   );
 
   DioHelper.init();
   await CacheHelper.init();
-  bool isDark = CacheHelper.getModeBoolean(key: 'isDark');
-  runApp(MyApp(isDark));
+
+  bool isDark = await CacheHelper.getData(key: 'isDark') ?? false;
+  Widget widget;
+  bool onBoarding = await CacheHelper.getData(key: 'onBoarding') ?? false;
+  String token = await CacheHelper.getData(key: 'token') ?? 'empty-token';
+
+  if (onBoarding) {
+    if (token != 'empty-token') {
+      widget = ShopLayout();
+    } else {
+      widget = ShopLoginScreen();
+    }
+  } else {
+    widget = OnBoardingScreen();
+  }
+
+  runApp(MyApp(isDark: isDark, startWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
   final bool isDark;
-  const MyApp(this.isDark);
+  final Widget startWidget;
+  const MyApp({required this.isDark, required this.startWidget});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) =>
-          NewsCubit()..changeAppMode(fromShared: isDark),
-      child: BlocConsumer<NewsCubit, NewsStates>(
+          AppCubit()..changeAppMode(fromShared: isDark),
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
@@ -49,7 +67,7 @@ class MyApp extends StatelessWidget {
             //     ? ThemeMode.dark
             //     : ThemeMode.light,
             home: Directionality(
-                textDirection: TextDirection.ltr, child: OnBoardingScreen()),
+                textDirection: TextDirection.ltr, child: startWidget),
           );
         },
       ),
