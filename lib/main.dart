@@ -11,7 +11,9 @@ import 'package:flutter_first_app/shared/cubit/app_states.dart';
 import 'package:flutter_first_app/shared/styles/themes.dart';
 import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
 // import 'layout/shop_layout.dart';
+import 'modules/cubit/shop_home_cubit.dart';
 import 'modules/on_boarding/on_boarding_screen.dart';
+import 'shared/components/constants.dart';
 import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
@@ -30,7 +32,7 @@ void main() async {
   bool isDark = await CacheHelper.getData(key: 'isDark') ?? false;
   Widget widget;
   bool onBoarding = await CacheHelper.getData(key: 'onBoarding') ?? false;
-  String token = await CacheHelper.getData(key: 'token') ?? 'empty-token';
+  token = await CacheHelper.getData(key: 'token') ?? 'empty-token';
 
   if (onBoarding) {
     if (token != 'empty-token') {
@@ -51,15 +53,22 @@ class MyApp extends StatelessWidget {
   const MyApp({required this.isDark, required this.startWidget});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) =>
-          AppCubit()..changeAppMode(fromShared: isDark),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) =>
+              AppCubit()..changeAppMode(fromShared: isDark),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => ShopHomeCubit()..getHomeData(),
+        ),
+      ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'News App',
+            title: 'Shopify App',
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: ThemeMode.light,

@@ -29,7 +29,7 @@ ThemeData darkTheme = ThemeData(
     type: BottomNavigationBarType.fixed,
     elevation: 20.0,
     backgroundColor: HexColor('333739'),
-    selectedItemColor: Colors.deepOrange,
+    selectedItemColor: defaultColor,
     unselectedItemColor: Colors.grey,
   ),
   textTheme: TextTheme(

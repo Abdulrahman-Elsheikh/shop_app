@@ -2,7 +2,6 @@
 
 // import 'dart:ffi';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_app/shared/cubit/app_states.dart';
 import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
@@ -20,7 +19,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppChangeModeState());
     } else {
       isDark = !isDark;
-      CacheHelper.putModeBoolean(key: 'isDark', value: isDark).then((value) {
+      CacheHelper.saveData(key: 'isDark', value: isDark).then((value) {
         emit(AppChangeModeState());
       });
     }
