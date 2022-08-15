@@ -66,7 +66,7 @@ Widget defaultTextField({
       },
       onFieldSubmitted: (value) {
         if (onSubmit != null) {
-          onSubmit();
+          onSubmit(value);
         }
       },
       onChanged: (String value) {
