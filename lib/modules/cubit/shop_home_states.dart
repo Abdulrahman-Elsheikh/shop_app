@@ -36,3 +36,12 @@ class ShopHomeSuccessUserDataState extends ShopHomeStates {
 }
 
 class ShopHomeErrorUserDataState extends ShopHomeStates {}
+
+class ShopHomeLoadingUserUpdateState extends ShopHomeStates {}
+
+class ShopHomeSuccessUserUpdateState extends ShopHomeStates {
+  final ShopLoginModel? userModel;
+  ShopHomeSuccessUserUpdateState(this.userModel);
+}
+
+class ShopHomeErrorUserUpdateState extends ShopHomeStates {}

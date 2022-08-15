@@ -12,6 +12,7 @@ import '../cubit/shop_home_states.dart';
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
 
+  var formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -31,57 +32,78 @@ class SettingsScreen extends StatelessWidget {
           condition: ShopHomeCubit.get(context).userModel != null,
           builder: (context) => Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                defaultTextField(
-                  controller: nameController,
-                  type: TextInputType.name,
-                  validate: (String value) {
-                    if (value.isEmpty) {
-                      return 'Name is required';
-                    }
-                    return null;
-                  },
-                  hintText: 'Name',
-                  labelText: 'Name',
-                  prefixIcon: Icons.person,
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    if (state is ShopHomeLoadingUserUpdateState)
+                      LinearProgressIndicator(),
+                    SizedBox(height: 20),
+                    defaultTextField(
+                      controller: nameController,
+                      type: TextInputType.name,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'Name is required';
+                        }
+                        return null;
+                      },
+                      hintText: 'Name',
+                      labelText: 'Name',
+                      prefixIcon: Icons.person,
+                    ),
+                    SizedBox(height: 20),
+                    defaultTextField(
+                      controller: emailController,
+                      type: TextInputType.emailAddress,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'email is required';
+                        }
+                        return null;
+                      },
+                      hintText: 'Email',
+                      labelText: 'Email',
+                      prefixIcon: Icons.email,
+                    ),
+                    SizedBox(height: 20),
+                    defaultTextField(
+                      controller: phoneController,
+                      type: TextInputType.phone,
+                      validate: (String value) {
+                        if (value.isEmpty) {
+                          return 'Phone is required';
+                        }
+                        return null;
+                      },
+                      hintText: 'Phone',
+                      labelText: 'Phone',
+                      prefixIcon: Icons.phone,
+                    ),
+                    SizedBox(height: 20),
+                    defaultButton(
+                      function: () {
+                        if (formKey.currentState!.validate()) {
+                          ShopHomeCubit.get(context).updateUserData(
+                            name: nameController.text,
+                            email: emailController.text,
+                            phone: phoneController.text,
+                          );
+                        }
+                      },
+                      text: 'update',
+                    ),
+                    SizedBox(height: 20),
+                    defaultButton(
+                      function: () {
+                        signOut(context);
+                      },
+                      text: 'logout',
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20),
-                defaultTextField(
-                  controller: emailController,
-                  type: TextInputType.emailAddress,
-                  validate: (String value) {
-                    if (value.isEmpty) {
-                      return 'email is required';
-                    }
-                    return null;
-                  },
-                  hintText: 'Email',
-                  labelText: 'Email',
-                  prefixIcon: Icons.email,
-                ),
-                SizedBox(height: 20),
-                defaultTextField(
-                  controller: phoneController,
-                  type: TextInputType.phone,
-                  validate: (String value) {
-                    if (value.isEmpty) {
-                      return 'Phone is required';
-                    }
-                    return null;
-                  },
-                  hintText: 'Phone',
-                  labelText: 'Phone',
-                  prefixIcon: Icons.phone,
-                ),
-                SizedBox(height: 20),
-                defaultButton(
-                  function: () {
-                    signOut(context);
-                  },
-                  text: 'logout',
-                ),
-              ],
+              ),
             ),
           ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
