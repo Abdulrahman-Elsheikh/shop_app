@@ -3,8 +3,8 @@
 // import 'dart:ffi';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_app/shared/cubit/app_states.dart';
-import 'package:flutter_first_app/shared/network/local/cache_helper.dart';
+import 'package:my_shopify/shared/cubit/app_states.dart';
+import 'package:my_shopify/shared/network/local/cache_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());

@@ -1,4 +1,4 @@
-package com.abdulrahman.flutter.flutter_first_app
+package com.abdulrahman.flutter.my_shopify
 
 import io.flutter.embedding.android.FlutterActivity
 

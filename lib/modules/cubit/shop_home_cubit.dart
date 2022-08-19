@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_app/modules/categories/categories_screen.dart';
-import 'package:flutter_first_app/modules/cubit/shop_home_states.dart';
-import 'package:flutter_first_app/modules/favorites/favorites_screen.dart';
-import 'package:flutter_first_app/modules/products/products_screen.dart';
-import 'package:flutter_first_app/modules/settings/settings.dart';
-import 'package:flutter_first_app/shared/components/constants.dart';
+import 'package:my_shopify/modules/categories/categories_screen.dart';
+import 'package:my_shopify/modules/cubit/shop_home_states.dart';
+import 'package:my_shopify/modules/favorites/favorites_screen.dart';
+import 'package:my_shopify/modules/products/products_screen.dart';
+import 'package:my_shopify/modules/settings/settings.dart';
+import 'package:my_shopify/shared/components/constants.dart';
 
 import '../../models/shop_app/categories_model.dart';
 import '../../models/shop_app/change_favorites_model.dart';

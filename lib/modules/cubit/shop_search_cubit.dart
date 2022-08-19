@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_app/models/shop_app/search-model.dart';
-import 'package:flutter_first_app/modules/cubit/shop_search_states.dart';
-import 'package:flutter_first_app/shared/network/remote/dio_helper.dart';
+import 'package:my_shopify/models/shop_app/search-model.dart';
+import 'package:my_shopify/modules/cubit/shop_search_states.dart';
+import 'package:my_shopify/shared/network/remote/dio_helper.dart';
 
 import '../../shared/components/constants.dart';
 import '../../shared/network/endpoints.dart';
