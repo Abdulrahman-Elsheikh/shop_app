@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shopify/modules/cubit/shop_login_states.dart';
+import 'shop_login_states.dart';
 
 import '../../models/shop_app/login_model.dart';
 import '../../shared/network/endpoints.dart';
@@ -28,10 +28,13 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
   void userLogin({required String email, required String password}) {
     emit(ShopLoginLoadingState());
 
-    DioHelper.postData(url: LOGIN, data: {
-      'email': email,
-      'password': password,
-    }).then((value) {
+    DioHelper.postData(
+      url: LOGIN,
+      data: {
+        'email': email,
+        'password': password,
+      },
+    ).then((value) {
       print(value.data);
       loginModel = ShopLoginModel.fromJson(value.data);
       emit(ShopLoginSuccessState(loginModel));

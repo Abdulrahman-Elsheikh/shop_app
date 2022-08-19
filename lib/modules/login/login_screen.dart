@@ -3,9 +3,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shopify/layout/shop_layout.dart';
-import 'package:my_shopify/modules/cubit/shop_login_states.dart';
-import 'package:my_shopify/shared/components/constants.dart';
+import '../../layout/shop_layout.dart';
+import "../cubit/shop_login_states.dart";
+import '../../shared/components/constants.dart';
 import '../../shared/components/components.dart';
 import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
@@ -23,7 +23,7 @@ class ShopLoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
-        listener: (BuildContext context, state) {
+        listener: (BuildContext context, ShopLoginStates state) {
           if (state is ShopLoginSuccessState) {
             if (state.loginModel.status == true) {
               showToast(
@@ -43,6 +43,8 @@ class ShopLoginScreen extends StatelessWidget {
                   message: state.loginModel.message ?? '',
                   state: ToastStates.ERROR);
             }
+          } else {
+            showToast(message: '$state', state: ToastStates.ERROR);
           }
         },
         builder: (BuildContext context, state) {

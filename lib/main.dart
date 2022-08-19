@@ -3,14 +3,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shopify/layout/shop_layout.dart';
-import 'package:my_shopify/modules/login/login_screen.dart';
-import 'package:my_shopify/shared/bloc_observer.dart';
-import 'package:my_shopify/shared/cubit/app_cubit.dart';
-import 'package:my_shopify/shared/cubit/app_states.dart';
-import 'package:my_shopify/shared/styles/themes.dart';
-import 'package:my_shopify/shared/network/local/cache_helper.dart';
-// import 'layout/shop_layout.dart';
+import 'package:my_shopify/modules/cubit/shop_login_cubit.dart';
+import 'layout/shop_layout.dart';
+import 'modules/login/login_screen.dart';
+import 'shared/bloc_observer.dart';
+import 'shared/cubit/app_cubit.dart';
+import 'shared/cubit/app_states.dart';
+import 'shared/styles/themes.dart';
+import 'shared/network/local/cache_helper.dart';
 import 'modules/cubit/shop_home_cubit.dart';
 import 'modules/on_boarding/on_boarding_screen.dart';
 import 'shared/components/constants.dart';
@@ -22,6 +22,7 @@ void main() async {
   BlocOverrides.runZoned(
     () {
       AppCubit();
+      ShopLoginCubit();
     },
     blocObserver: MyBlocObserver(),
   );

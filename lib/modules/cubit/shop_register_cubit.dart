@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shopify/modules/cubit/shop_register-states.dart';
-
+import 'shop_register-states.dart';
 import '../../models/shop_app/login_model.dart';
 import '../../shared/network/endpoints.dart';
 import '../../shared/network/remote/dio_helper.dart';
