@@ -3,7 +3,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shopify/modules/cubit/shop_login_cubit.dart';
 import 'layout/shop_layout.dart';
 import 'modules/login/login_screen.dart';
 import 'shared/bloc_observer.dart';
@@ -18,14 +17,6 @@ import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  BlocOverrides.runZoned(
-    () {
-      AppCubit();
-      ShopLoginCubit();
-    },
-    blocObserver: MyBlocObserver(),
-  );
 
   DioHelper.init();
   await CacheHelper.init();
@@ -45,7 +36,10 @@ void main() async {
     widget = OnBoardingScreen();
   }
 
-  runApp(MyApp(isDark: isDark, startWidget: widget));
+  BlocOverrides.runZoned(
+    () => runApp(MyApp(isDark: isDark, startWidget: widget)),
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
